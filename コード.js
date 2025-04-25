@@ -75,17 +75,25 @@ function generateMaleDataSourceCode() {
           // 2つの値がある場合、条件付き連結
           let pos1 = dataValues[itemNumber - 1][0];
           let pos2 = dataValues[itemNumber - 1][1];
-          outputCode = `if(values01[${pos1.row}][${pos1.col}] != ""){values01[${pos1.row}][${pos1.col}] + " " + values01[${pos2.row}][${pos2.col}]}`;
+          outputCode = `if(values01[${pos1.row}][${pos1.col}] != ""){data1[r${rowIndex}][${itemNumber - 1}] = values01[${pos1.row}][${pos1.col}] + " " + values01[${pos2.row}][${pos2.col}]}`;
         } else {
           // 3つ以上の値がある場合、最初の2つだけ使用
           let pos1 = dataValues[itemNumber - 1][0];
           let pos2 = dataValues[itemNumber - 1][1];
-          outputCode = `if(values01[${pos1.row}][${pos1.col}] != ""){values01[${pos1.row}][${pos1.col}] + " " + values01[${pos2.row}][${pos2.col}]}`;
+          outputCode = `if(values01[${pos1.row}][${pos1.col}] != ""){data1[r${rowIndex}][${itemNumber - 1}] = values01[${pos1.row}][${pos1.col}] + " " + values01[${pos2.row}][${pos2.col}]}`;
         }
         
-        scriptSheet.getRange(itemNumber, 1).setValue(
-          `data1[r${rowIndex}][${itemNumber - 1}] = ${outputCode}// ${headerLabel}`
-        );
+        // 条件文が含まれる場合は、そのまま出力
+        if (occurrenceCount[itemNumber - 1] >= 2) {
+          scriptSheet.getRange(itemNumber, 1).setValue(
+            `${outputCode}// ${headerLabel}`
+          );
+        } else {
+          // 1つの値のみの場合は、従来通り代入式を含める
+          scriptSheet.getRange(itemNumber, 1).setValue(
+            `data1[r${rowIndex}][${itemNumber - 1}] = ${outputCode}// ${headerLabel}`
+          );
+        }
       }
     }
   }
