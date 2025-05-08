@@ -22,8 +22,8 @@ Google スプレッドシートからデータを抽出し、特定の形式で�
 
 ## 参照スプレッドシート
 
-以下のスプレッドシートで機能を試すことができます：
-https://docs.google.com/spreadsheets/d/1yY7Vbu-dvksWuckQUt5lDzobo60w-IRmsndlCS0rvOM/edit?usp=sharing
+以下のスプレッドシートをコピーして機能を試すことができます：
+https://docs.google.com/spreadsheets/d/1yY7Vbu-dvksWuckQUt5lDzobo60w-IRmsndlCS0rvOM/copy
 
 ## シート構成
 
